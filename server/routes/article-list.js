@@ -25,9 +25,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/', (req,res,next) => {
   let  { searchTerms, orderBy } = req.body.data
-
   const url = `${BASE_URL}search?q=${searchTerms}&order-by=${orderBy}&api-key=${process.env.GUARDIAN_API}`
-  console.log(url)
   request.get(url, (err, response, body) => {
     if (err) {
       return reject(err);
