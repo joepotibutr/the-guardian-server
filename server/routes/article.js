@@ -8,10 +8,10 @@ env.config()
 const router = express.Router();
 
 const BASE_URL = 'http://content.guardianapis.com/';
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  const id = "business/2014/feb/18/uk-inflation-falls-below-bank-england-target"
 
+
+router.get('/', function(req, res, next) {
+  const { id } = req.query
   const url = `${BASE_URL}/${id}?api-key=${process.env.GUARDIAN_API}`
 
 
