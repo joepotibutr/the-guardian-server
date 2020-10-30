@@ -1,6 +1,5 @@
 import express from 'express'
 import request from 'request'
-import querystring from 'querystring'
 import env from 'dotenv'
 
 env.config()
@@ -22,6 +21,19 @@ router.get('/', function(req, res, next) {
       }
       res.send(JSON.parse(body))
     })
+})
+
+router.post('/', (req,res,next) => {
+  let  { searchTerms, orderBy } = req.body.data
+
+  const url = `${BASE_URL}search?q=${searchTerms}&order-by=${orderBy}&api-key=${process.env.GUARDIAN_API}`
+  console.log(url)
+  request.get(url, (err, response, body) => {
+    if (err) {
+      return reject(err);
+    }
+    res.send(JSON.parse(body))
+  })
 })
 
 export default router
